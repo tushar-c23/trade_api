@@ -1,21 +1,21 @@
 from pydantic import BaseModel
 
 class Order(BaseModel):
-    tag: str
-    transaction_type: str
-    exchange_segment: str
-    product_type: str
-    order_type: str
+    transactionType: str
+    exchangeSegment: str
+    productType: str
+    orderType: str
     validity: str
-    security_id: str
+    tradingSymbol: str | None = None
+    securityId: str
     quantity: int
-    disclosed_quantity: int
+    disclosedQuantity: int
     price: float
-    trigger_price: float
-    after_market_order: bool = False
-    amo_time: str = 'OPEN'
-    bo_profit_value: float = 0
-    bo_stop_loss_Value: float = 0
-    drv_expiry_date: str = None
-    drv_options_type: str = None
-    drv_strike_price: float = None
+    triggerPrice: float
+    afterMarketOrder: bool = False
+    amoTime: str = 'OPEN'
+    boProfitValue: float = 0
+    boStopLossValue: float = 0
+    drvExpiryDate: str = None
+    drvOptionsType: str = None
+    drvStrikePrice: float = None
