@@ -1,7 +1,10 @@
 from dhanhq import dhanhq
 from dhanhq import marketfeed
 
-dhan = dhanhq("client_id", "access_token")
+client_id = "client_id"
+access_token = "access_token"
+
+dhan = dhanhq(client_id, access_token)
 
 # Order place buy
 dhan.place_order(security_id='1333', #hdfcBank
@@ -26,9 +29,6 @@ dhan.get_order_list()
 
 # Get holdings
 dhan.get_holdings()
-
-client_id = "client_id"
-access_token = "access_token"
 
 instruments = [(1, "1333"), (0, "11536")]
 
