@@ -19,3 +19,11 @@ class Order(BaseModel):
     drvExpiryDate: str = None
     drvOptionsType: str = None
     drvStrikePrice: float = None
+
+class historicalData(BaseModel):
+    symbol: str
+    exchangeSegment: str
+    instrument: str
+    expiryCode: int = 0
+    fromDate: str
+    toDate: str

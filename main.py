@@ -1,5 +1,5 @@
 from typing import Union
-from models import Order
+from models import Order, historicalData
 from fastapi import FastAPI, Header
 from dhanhq import dhanhq
 import httpx
@@ -77,3 +77,23 @@ async def place_order_with_creds(order: Order, dhanClientId: str, correlationId:
     # print(resp.json())
     # return resp
     return resp.json()
+
+@app.post("/historicalData/")
+async def get_historical_data(historicalData: historicalData, access_token: str | None):
+    if(access_token):
+        headers = {'Accept': 'application/json', 'access-token' : access_token}
+        url = f"{dhanUrl}/charts/historical"
+        fetched_data = httpx.post(url, json=historicalData.dict(), headers=headers)
+        return fetched_data.json()
+
+@app.post("/historicalDataPy/")
+async def get_historical_data_with_python(historicalData: historicalData):
+    fetched_data = dhan.historical_daily_data(
+        symbol=historicalData.symbol,
+        exchange_segment=historicalData.exchangeSegment,
+        instrument_type=historicalData.instrument,
+        expiry_code=historicalData.expiryCode,
+        from_date=historicalData.fromDate,
+        to_date=historicalData.toDate
+    )
+    return fetched_data
