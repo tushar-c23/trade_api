@@ -1,9 +1,13 @@
 from dhanhq import marketfeed
+import os
+from dotenv import load_dotenv
 
-client_id = 'your_client_id'
-access_token = 'your_access_token'
+load_dotenv()
 
-instruments = [(1, "1334"),(0,"13")]
+client_id = os.getenv("CLIENT_ID")
+access_token = os.getenv("ACCESS_TOKEN")
+
+instruments = [(1, "236"),(0,"236")]
 
 subscription_code = marketfeed.Ticker
 
@@ -15,7 +19,7 @@ async def on_message(instance, message):
 
 print("Subscription Code: ", subscription_code)
 
-feed = marketfeed.DhanFeed(client_id,
+feed = await marketfeed.DhanFeed(client_id,
                             access_token,
                             instruments,
                             subscription_code,
